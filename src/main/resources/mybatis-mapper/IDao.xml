@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org/DTD Mapper 3.0/EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.rlagus.rubatokh.dao.IDao">
+
+	<insert id="boardWriteDao">
+		INSERT INTO rubafreeboard (bnum, bname, btitle, bcontent, bhit, buserid, breplycount, bfilecount)
+			VALUES (rfb_seq.nextval, #{param1}, #{param2}, #{param3}, 0, #{param4}, 0, #{param5})
+	</insert>
+	
+	<select id="boardListDao" resultType="com.rlagus.rubatokh.dto.RFboardDto">
+		SELECT * FROM rubafreeboard ORDER BY bnum DESC
+	</select>
+	
+	<select id="boardTotalCountDao" resultType="int">
+		SELECT count(*) FROM rubafreeboard
+	</select>
+	
+	<select id="boardContentViewDao" resultType="com.rlagus.rubatokh.dto.RFboardDto">
+		SELECT * FROM rubafreeboard WHERE bnum=#{param1}
+	</select>
+	
+	<update id="boardHitDao">
+		UPDATE rubafreeboard SET bhit=bhit+1 WHERE bnum=#{param1}
+	</update>
+	
+	
+	
+	<select id="boardSearchTitleDao" resultType="com.rlagus.rubatokh.dto.RFboardDto">
+		SELECT * FROM rubafreeboard WHERE btitle LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+	</select>										<!-- 오라클 전용 형식 -->
+	
+	<select id="boardSearchContentDao" resultType="com.rlagus.rubatokh.dto.RFboardDto">
+		SELECT * FROM rubafreeboard WHERE bcontent LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+	</select>										<!-- 오라클 전용 형식 -->
+	
+	<select id="boardSearchWriterDao" resultType="com.rlagus.rubatokh.dto.RFboardDto">
+		SELECT * FROM rubafreeboard WHERE bname LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+	</select>										<!-- 오라클 전용 형식 -->
+	
+	
+	
+	<insert id="replyWriteDao">
+		INSERT INTO rubareply (rnum, rcontent, rid, rorinum) 
+			VALUES (rfr_seq.nextval, #{param1}, '운영자', #{param2})
+	</insert>
+	
+	<update id="replyCountDao">
+		UPDATE rubafreeboard SET breplycount=breplycount+1 WHERE bnum=#{param1} 
+	</update>
+	
+	<select id="replyListDao" resultType="com.rlagus.rubatokh.dto.RReplyDto">
+		SELECT * FROM rubareply WHERE rorinum=#{param1}
+	</select>
+	
+	<delete id="replyDeleteDao">
+		DELETE FROM rubareply WHERE rnum=#{param1}
+	</delete>
+	
+	<update id="replyDeleteCountDao">
+		UPDATE rubafreeboard SET breplycount=breplycount-1 WHERE bnum=#{param1}
+	</update>
+	
+	<delete id="boardContentDeleteDao">
+		DELETE FROM rubareply WHERE rorinum=#{param1}
+		DELETE FROM rubafreeboard WHERE bnum=#{param1}
+	</delete>
+	
+</mapper>
