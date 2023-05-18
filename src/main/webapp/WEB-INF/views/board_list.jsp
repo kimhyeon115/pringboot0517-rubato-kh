@@ -103,6 +103,9 @@
           		<c:if test="${dto.breplycount != 0}">&nbsp;&nbsp;&nbsp;&nbsp;
           		<span style="color:#999999"; font-size: 8px;>[${dto.breplycount}]</span>
           		</c:if>
+          		<c:if test="${dto.bfilecount != 0}">
+          			<img width="15" src="/resources/img/fileimg.png">
+          		</c:if>
           		</td>
           	<td class="col3">${dto.bname}</td>
           	<td class="col4"><c:out value="${fn:substring(dto.bdate,0,10)}"></c:out></td>

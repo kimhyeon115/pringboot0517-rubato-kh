@@ -74,6 +74,18 @@
         <p id="view_content">
           ${boardDto.bcontent}
         </p>
+        
+        <p id="file_info">
+        	※ 첨부파일 :
+        	<a href="/resources/uploadfiles/${fileDto.filename}" download>${fileDto.fileoriname}</a>        
+        </p>
+        <br>
+        <c:if test="${fileDto.fileextension == 'jpg' or fileDto.fileextension == 'png' or fileDto.fileextension == 'gif' or fileDto.fileextension == 'bnp'}">
+        	<br>
+        		<img width="300" src="/resources/uploadfiles/${fileDto.filename}">
+        	<br>
+        </c:if>
+        
         <table border="1" cellpadding="0" cellspacing="0" width="750">
         	<c:forEach items="${replyList}" var="replyDto">
         	<tr>
@@ -86,7 +98,7 @@
         	</tr>
         	</c:forEach>
         </table>
-        <form action="reply_write">
+        <form action="reply_write" method="post">
         	<input type="hidden" name="rorinum" value="${boardDto.bnum}">
 	        <div id="comment_box">
 	          <img id="title_comment" src="/resources/img/title_comment.gif">

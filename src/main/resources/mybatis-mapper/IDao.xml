@@ -72,4 +72,27 @@
 		DELETE FROM rubareply WHERE rorinum=#{param1}
 	</delete>
 	
+	
+<!-- 	<delete id="boardContentDeleteDao">
+       DELETE FROM rubafreeboard a
+          WHERE EXISTS (
+             SELECT 1
+             FROM rubareply b
+             WHERE a.bnum = b.rorinum AND b.rorinum = #{param1}
+             )
+    </delete>
+ -->	
+ 
+ 
+ 	<!-- 파일 업로드 관련 -->
+ 	<insert id="fileInfoCreateDao">
+		INSERT INTO
+			rubafiles(filenum, forinum, fileoriname, filename, fileextension, fileurl)
+				VALUES (rffile_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+	
+	<select id="getFileInfoDao" resultType="com.rlagus.rubatokh.dto.FileDto">
+		SELECT * FROM rubafiles WHERE forinum=#{param1}
+	</select>
+ 
 </mapper>
