@@ -26,4 +26,5 @@ public interface IDao {
 	public void replyDeleteDao(String rnum);
 	public void replyDeleteCountDao(int rnum);
 	public void boardContentDeleteDao(String bnum);
+	public void replysDeleteDao(String rorinum);
 }

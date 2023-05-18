@@ -64,9 +64,12 @@
 		UPDATE rubafreeboard SET breplycount=breplycount-1 WHERE bnum=#{param1}
 	</update>
 	
-	<delete id="boardContentDeleteDao">
-		DELETE FROM rubareply WHERE rorinum=#{param1}
+	<delete id="boardContentDeleteDao">		
 		DELETE FROM rubafreeboard WHERE bnum=#{param1}
+	</delete>
+	
+	<delete id="replysDeleteDao">
+		DELETE FROM rubareply WHERE rorinum=#{param1}
 	</delete>
 	
 </mapper>
